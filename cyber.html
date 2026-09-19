@@ -1,0 +1,396 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cybersecurity — DINESH</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap');
+
+    :root {
+      font-family: Inter, system-ui, sans-serif;
+      color: #f5f5f5;
+      background: #050505;
+      --red: #e50914;
+      --line: rgba(255, 255, 255, .1);
+      --muted: rgba(255, 255, 255, .62);
+      --mono: 'DM Mono', monospace;
+      --display: 'Space Grotesk', sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; min-width: 320px; background: #050505; }
+    a { text-decoration: none; color: inherit; }
+
+    .site {
+      min-height: 100vh;
+      background: radial-gradient(circle at 80% 0%, rgba(229, 9, 20, .08), transparent 32%), #050505;
+      overflow: hidden;
+    }
+
+    .nav {
+      position: fixed;
+      z-index: 50;
+      top: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(1260px, calc(100% - 32px));
+      height: 70px;
+      padding: 0 18px;
+      border: 1px solid #ffffff18;
+      border-radius: 22px;
+      background: #080808c9;
+      backdrop-filter: blur(22px);
+      display: flex;
+      align-items: center;
+      gap: 25px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font: 700 20px var(--display);
+    }
+
+    .brand b {
+      display: grid;
+      place-items: center;
+      width: 35px;
+      height: 35px;
+      border-radius: 11px;
+      background: #fff;
+      color: #050505;
+    }
+
+    .brand span span, .red { color: var(--red); }
+
+    .nav-links {
+      display: flex;
+      gap: 20px;
+      margin-left: auto;
+      font-size: 12px;
+    }
+
+    .nav-links a { color: #aaa; transition: color .25s ease; }
+    .nav-links a:hover { color: #fff; }
+    .nav-links a.active { color: #fff; }
+
+    .back-btn {
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 10px 16px;
+      border: 1px solid #ffffff22;
+      border-radius: 999px;
+      transition: background .25s ease;
+    }
+
+    .back-btn:hover { background: #ffffff10; }
+
+    .sub-hero {
+      max-width: 1260px;
+      margin: auto;
+      padding: 150px 32px 60px;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: #888;
+      font: 11px var(--mono);
+      margin-bottom: 24px;
+      transition: color .25s ease;
+    }
+
+    .back-link:hover { color: #fff; }
+
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #888;
+      font: 500 10px var(--mono);
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      margin-bottom: 17px;
+    }
+
+    .eyebrow i { width: 28px; height: 1px; background: var(--red); }
+
+    .sub-hero h1 {
+      font: 700 clamp(48px, 8vw, 96px) / .94 var(--display);
+      letter-spacing: -.07em;
+      margin: 12px 0 20px;
+    }
+
+    .sub-hero h1 span { color: var(--red); }
+
+    .sub-hero p {
+      max-width: 640px;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.75;
+    }
+
+    .resource-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+      max-width: 1260px;
+      margin: auto;
+      padding: 0 32px 80px;
+    }
+
+    .resource-card {
+      border: 1px solid var(--line);
+      background: linear-gradient(145deg, #ffffff0e, #ffffff04);
+      border-radius: 24px;
+      padding: 32px;
+      position: relative;
+      overflow: hidden;
+      transition: transform .35s ease, border-color .35s ease, box-shadow .35s ease;
+    }
+
+    .resource-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 3px;
+      height: 0;
+      background: var(--red);
+      transition: height .4s ease;
+    }
+
+    .resource-card:hover {
+      transform: translateY(-5px);
+      border-color: #e5091455;
+      box-shadow: 0 28px 60px #000a;
+    }
+
+    .resource-card:hover::before { height: 100%; }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font: 500 10px var(--mono);
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 18px;
+    }
+
+    .chip i {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--red);
+    }
+
+    .resource-card h3 {
+      font: 600 24px / 1.15 var(--display);
+      margin: 0 0 12px;
+      letter-spacing: -.02em;
+    }
+
+    .resource-card p {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.7;
+      margin: 0 0 22px;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 22px;
+    }
+
+    .tags span {
+      font: 10px var(--mono);
+      color: #999;
+      padding: 5px 8px;
+      border: 1px solid var(--line);
+      background: #ffffff05;
+      border-radius: 6px;
+    }
+
+    .resource-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .resource-actions a {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 10px 16px;
+      border-radius: 999px;
+      font: 700 10px var(--mono);
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      transition: transform .25s ease, background .25s ease, box-shadow .25s ease;
+    }
+
+    .resource-actions a.primary {
+      background: var(--red);
+      color: #fff;
+      border: 1px solid var(--red);
+    }
+
+    .resource-actions a.primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(229, 9, 20, .4);
+    }
+
+    footer {
+      max-width: 1260px;
+      margin: auto;
+      padding: 28px 32px 38px;
+      border-top: 1px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      color: #444;
+      font: 10px var(--mono);
+    }
+
+    @media (max-width: 1000px) {
+      .resource-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 720px) {
+      .nav-links { display: none; }
+      .sub-hero { padding: 125px 20px 40px; }
+      .resource-grid { padding: 0 20px 60px; }
+      footer {
+        flex-direction: column;
+        padding: 24px 20px;
+        gap: 6px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="site">
+    <header class="nav">
+      <a class="brand" href="/">
+        <b>D</b>
+        <span>DINESH<span>.</span></span>
+      </a>
+      <nav class="nav-links">
+        <a href="/full-stack.html">Full Stack</a>
+        <a href="/cyber.html" class="active">Cyber</a>
+        <a href="/hardware.html">Hardware</a>
+      </nav>
+      <a class="back-btn" href="/">← Back to Portfolio</a>
+    </header>
+
+    <section class="sub-hero">
+      <a class="back-link" href="/">← Back to Portfolio</a>
+      <div class="eyebrow"><i></i> CYBERSECURITY</div>
+      <h1>Security work<br>with <span>evidence.</span></h1>
+      <p>
+        Authorized penetration testing, awareness projects and cybersecurity
+        documentation from academic labs, industry challenges and personal research.
+      </p>
+    </section>
+
+    <section class="resource-grid">
+      <article class="resource-card">
+        <div class="chip"><i></i> SECURITY AWARENESS</div>
+        <h3>CamHacker</h3>
+        <p>
+          An authorized camera-permission awareness project focused on browser
+          privacy risks, social engineering awareness and prevention techniques.
+        </p>
+        <div class="tags">
+          <span>Bash</span>
+          <span>PHP</span>
+          <span>JavaScript</span>
+        </div>
+        <div class="resource-actions">
+          <a class="primary"
+             href="/assets/cyber/camhacker/CamHacker.pptx"
+             download>Download PPTX ↓</a>
+        </div>
+      </article>
+
+      <article class="resource-card">
+        <div class="chip"><i></i> PENETRATION TESTING</div>
+        <h3>EV Cyber Academy — Penetration Test</h3>
+        <p>
+          Full offensive security assessment covering FTP anonymous access,
+          web command injection (RCE), admin portal bypass and SMB share
+          exposure with remediation recommendations.
+        </p>
+        <div class="tags">
+          <span>Kali Linux</span>
+          <span>Nmap</span>
+          <span>Metasploit</span>
+          <span>SMB</span>
+        </div>
+        <div class="resource-actions">
+          <a class="primary"
+             href="/assets/cyber/ev-cyber-pentest/report.pdf"
+             target="_blank" rel="noopener">Open Report PDF ↗</a>
+        </div>
+      </article>
+
+      <article class="resource-card">
+        <div class="chip"><i></i> CYBER CHALLENGE 2026</div>
+        <h3>CSSP Beginner Cyber Challenge</h3>
+        <p>
+          450-point academic challenge covering Linux fundamentals, network
+          analysis, reconnaissance, Nmap enumeration and Android APK static
+          analysis with reproducible evidence.
+        </p>
+        <div class="tags">
+          <span>Linux</span>
+          <span>Nmap</span>
+          <span>Whois</span>
+          <span>APK Analysis</span>
+        </div>
+        <div class="resource-actions">
+          <a class="primary"
+             href="/assets/cyber/cssp-challenge/report.pdf"
+             target="_blank" rel="noopener">Open Report PDF ↗</a>
+        </div>
+      </article>
+
+      <article class="resource-card">
+        <div class="chip"><i></i> CAPSTONE ASSESSMENT</div>
+        <h3>Meesho Cybersecurity Capstone</h3>
+        <p>
+          Controlled website and network assessment of Meesho covering domain
+          intelligence, DNS resolution, TCP port analysis, HTTPS/TLS review
+          and HTTP security header inspection.
+        </p>
+        <div class="tags">
+          <span>DNS</span>
+          <span>TLS</span>
+          <span>HTTP Headers</span>
+          <span>Nmap</span>
+        </div>
+        <div class="resource-actions">
+          <a class="primary"
+             href="/assets/cyber/meesho-capstone/report.pdf"
+             target="_blank" rel="noopener">Open Report PDF ↗</a>
+        </div>
+      </article>
+    </section>
+
+    <footer>
+      <span>© 2026 DINESH.</span>
+      <span>Cybersecurity Reports</span>
+      <span>Authorized testing • Evidence-based</span>
+    </footer>
+  </div>
+</body>
+</html>

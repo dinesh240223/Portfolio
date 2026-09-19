@@ -1,0 +1,373 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Full Stack Projects — DINESH</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap');
+
+    :root {
+      font-family: Inter, system-ui, sans-serif;
+      color: #f5f5f5;
+      background: #050505;
+      --red: #e50914;
+      --line: rgba(255, 255, 255, .1);
+      --muted: rgba(255, 255, 255, .62);
+      --mono: 'DM Mono', monospace;
+      --display: 'Space Grotesk', sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; min-width: 320px; background: #050505; }
+    a { text-decoration: none; color: inherit; }
+
+    .site {
+      min-height: 100vh;
+      background: radial-gradient(circle at 80% 0%, rgba(229, 9, 20, .08), transparent 32%), #050505;
+      overflow: hidden;
+    }
+
+    .nav {
+      position: fixed;
+      z-index: 50;
+      top: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(1260px, calc(100% - 32px));
+      height: 70px;
+      padding: 0 18px;
+      border: 1px solid #ffffff18;
+      border-radius: 22px;
+      background: #080808c9;
+      backdrop-filter: blur(22px);
+      display: flex;
+      align-items: center;
+      gap: 25px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font: 700 20px var(--display);
+    }
+
+    .brand b {
+      display: grid;
+      place-items: center;
+      width: 35px;
+      height: 35px;
+      border-radius: 11px;
+      background: #fff;
+      color: #050505;
+    }
+
+    .brand span span, .red { color: var(--red); }
+
+    .nav-links {
+      display: flex;
+      gap: 20px;
+      margin-left: auto;
+      font-size: 12px;
+    }
+
+    .nav-links a { color: #aaa; transition: color .25s ease; }
+    .nav-links a:hover { color: #fff; }
+    .nav-links a.active { color: #fff; }
+
+    .back-btn {
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 10px 16px;
+      border: 1px solid #ffffff22;
+      border-radius: 999px;
+      transition: background .25s ease;
+    }
+
+    .back-btn:hover { background: #ffffff10; }
+
+    .sub-hero {
+      max-width: 1260px;
+      margin: auto;
+      padding: 150px 32px 60px;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: #888;
+      font: 11px var(--mono);
+      margin-bottom: 24px;
+      transition: color .25s ease;
+    }
+
+    .back-link:hover { color: #fff; }
+
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #888;
+      font: 500 10px var(--mono);
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      margin-bottom: 17px;
+    }
+
+    .eyebrow i { width: 28px; height: 1px; background: var(--red); }
+
+    .sub-hero h1 {
+      font: 700 clamp(48px, 8vw, 96px) / .94 var(--display);
+      letter-spacing: -.07em;
+      margin: 12px 0 20px;
+    }
+
+    .sub-hero h1 span { color: var(--red); }
+
+    .sub-hero p {
+      max-width: 640px;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.75;
+    }
+
+    .resource-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      max-width: 1260px;
+      margin: auto;
+      padding: 0 32px 80px;
+    }
+
+    .resource-card {
+      border: 1px solid var(--line);
+      background: linear-gradient(145deg, #ffffff0e, #ffffff04);
+      border-radius: 24px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform .35s ease, border-color .35s ease, box-shadow .35s ease;
+    }
+
+    .resource-card:hover {
+      transform: translateY(-5px);
+      border-color: #e5091455;
+      box-shadow: 0 28px 60px #000a;
+    }
+
+    .resource-thumb {
+      height: 190px;
+      background: #0d0d0d;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .resource-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: .85;
+      transition: transform .6s cubic-bezier(.2, .7, .2, 1), opacity .4s ease;
+    }
+
+    .resource-card:hover .resource-thumb img {
+      transform: scale(1.06);
+      opacity: 1;
+    }
+
+    .resource-thumb::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, #000c 5%, transparent 55%);
+      pointer-events: none;
+    }
+
+    .resource-body {
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .resource-body label {
+      display: block;
+      color: var(--red);
+      font: 500 10px var(--mono);
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .resource-body h3 {
+      font: 600 21px / 1.15 var(--display);
+      margin: 0 0 10px;
+      letter-spacing: -.02em;
+    }
+
+    .resource-body p {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.65;
+      margin: 0 0 18px;
+      flex: 1;
+    }
+
+    .resource-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .resource-actions a {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 9px 14px;
+      border-radius: 999px;
+      font: 700 10px var(--mono);
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      transition: transform .25s ease, background .25s ease, box-shadow .25s ease;
+    }
+
+    .resource-actions a.primary {
+      background: var(--red);
+      color: #fff;
+      border: 1px solid var(--red);
+    }
+
+    .resource-actions a.primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(229, 9, 20, .4);
+    }
+
+    footer {
+      max-width: 1260px;
+      margin: auto;
+      padding: 28px 32px 38px;
+      border-top: 1px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      color: #444;
+      font: 10px var(--mono);
+    }
+
+    @media (max-width: 1000px) {
+      .resource-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 720px) {
+      .nav-links { display: none; }
+      .sub-hero { padding: 125px 20px 40px; }
+      .resource-grid {
+        grid-template-columns: 1fr;
+        padding: 0 20px 60px;
+      }
+      footer {
+        flex-direction: column;
+        padding: 24px 20px;
+        gap: 6px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="site">
+    <header class="nav">
+      <a class="brand" href="/">
+        <b>D</b>
+        <span>DINESH<span>.</span></span>
+      </a>
+      <nav class="nav-links">
+        <a href="/full-stack.html" class="active">Full Stack</a>
+        <a href="/cyber.html">Cyber</a>
+        <a href="/hardware.html">Hardware</a>
+      </nav>
+      <a class="back-btn" href="/">← Back to Portfolio</a>
+    </header>
+
+    <section class="sub-hero">
+      <a class="back-link" href="/">← Back to Portfolio</a>
+      <div class="eyebrow"><i></i> FULL STACK DEVELOPMENT</div>
+      <h1>Web Applications<br>built to <span>scale.</span></h1>
+      <p>
+        Production-ready projects using PHP, MySQL, HTML, CSS and JavaScript.
+        Each project includes technical documentation and working demos.
+      </p>
+    </section>
+
+    <section class="resource-grid">
+      <article class="resource-card">
+        <div class="resource-thumb">
+          <img src="/assets/full-stack/little-steps/screenshot-1.png" alt="Little Steps">
+        </div>
+        <div class="resource-body">
+          <label>WEB APPLICATION</label>
+          <h3>Little Steps</h3>
+          <p>
+            Trusted 24×7 childcare platform connecting parents with verified daycare
+            centers. Full PHP + MySQL with parent, provider and admin dashboards.
+          </p>
+          <div class="resource-actions">
+            <a class="primary"
+               href="/assets/full-stack/little-steps/report.pdf"
+               target="_blank" rel="noopener">Report PDF ↗</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="resource-card">
+        <div class="resource-thumb">
+          <img src="/assets/full-stack/artbloom/screenshot-1.png" alt="ArtBloom">
+        </div>
+        <div class="resource-body">
+          <label>CREATIVE WEB PROJECT</label>
+          <h3>ArtBloom</h3>
+          <p>
+            A creative frontend project focused on presenting artwork through a
+            polished digital experience with smooth interactions.
+          </p>
+          <div class="resource-actions">
+            <a class="primary"
+               href="/assets/full-stack/artbloom/report.pdf"
+               target="_blank" rel="noopener">Report PDF ↗</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="resource-card">
+        <div class="resource-thumb">
+          <img src="/assets/full-stack/financial-habit-tracker/screenshot-1.png"
+               alt="Financial Habit Tracker">
+        </div>
+        <div class="resource-body">
+          <label>FINTECH WEB APPLICATION</label>
+          <h3>Financial Habit Tracker</h3>
+          <p>
+            A financial habit builder and wealth-growth tracker covering income,
+            expenses, savings goals and analytics with clean dashboards.
+          </p>
+          <div class="resource-actions">
+            <a class="primary"
+               href="/assets/full-stack/financial-habit-tracker/report.pdf"
+               target="_blank" rel="noopener">Report PDF ↗</a>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <footer>
+      <span>© 2026 DINESH.</span>
+      <span>Full Stack Development</span>
+      <span>PHP • MySQL • JavaScript</span>
+    </footer>
+  </div>
+</body>
+</html>

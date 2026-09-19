@@ -1,47 +1,31 @@
 # DINESH — Cybersecurity & Web Developer Portfolio
 
-A modern, cinematic portfolio website showcasing three technical tracks:
-Full Stack Development, Cybersecurity Research and Hardware Engineering.
+A static React + Vite portfolio built from the original portfolio concept and redesigned with a cinematic dark/Netflix-inspired visual language.
 
-Built as a static site with Vite — deployed on Vercel with zero backend.
+## Included
+- DINESH — Cybersecurity & Web Developer hero/profile
+- About, education, skills and mentoring sections
+- Projects: Little Steps, Financial Habit Tracker, ArtBloom, CamHacker, EV Cyber Defense Lab, EV BANK Security Lab
+- Cyber Missions flow: PortSwigger → Access Control Vulnerabilities → completed lab → evidence screenshot
+- 9 supplied PortSwigger evidence screenshots stored locally in `public/assets/evidence/`
+- Offensive and defensive security report links
+- Hifi11, NoviTech and EV Cyber Academy credential/document cards
+- GitHub, LinkedIn and email contact links
+- No database, Supabase or backend required
 
----
+## Run locally
+```bash
+npm install
+npm run dev
+```
 
-## 🎯 What's Inside
+## Production build
+```bash
+npm run build
+npm run preview
+```
 
-### 1. Full Stack Development
-Production-ready web applications built with PHP, MySQL, HTML, CSS and JavaScript.
+## Deploy
+The project is Vercel-friendly. Import the repository, use `npm run build` as the build command and the generated `dist` directory as the output.
 
-- **Little Steps** — 24×7 childcare platform connecting parents with verified daycare centers
-- **ArtBloom** — Creative frontend project with polished digital gallery experience
-- **Financial Habit Tracker** — FinTech web app for income, expenses and savings analytics
-
-### 2. Cybersecurity
-
-Authorized penetration testing, awareness projects and documented security research.
-
-- **CamHacker** — Browser camera-permission awareness project
-- **EV Cyber Academy Pentest** — Full offensive assessment (FTP, RCE, admin bypass, SMB)
-- **CSSP Beginner Cyber Challenge 2026** — 450-point academic challenge (Linux, Nmap, APK)
-- **Meesho Capstone** — Website & network security assessment
-
-### 3. Hardware Engineering
-
-- **AeroRescue Nexus** — Autonomous UAV + Ground Rover ecosystem for disaster response (Smart India Hackathon 2026)
-
----
-
-## 🛠 Tech Stack
-
-| Layer | Technology |
-|-------|------------|
-| Frontend | HTML5, CSS3, JavaScript |
-| Backend (projects) | PHP 8+ |
-| Database (projects) | MySQL |
-| Build tool | Vite 5 |
-| Deployment | Vercel |
-| Design | Custom dark/Netflix-inspired theme with Space Grotesk + DM Mono |
-
----
-
-## 📁 Project Structure
+All portfolio evidence is referenced from local `public/assets` paths, so the frontend does not need a database connection.
